@@ -9,6 +9,15 @@ CreateThread(function()
 	JobLabels()
 end)
 
+RegisterServerEvent('szymczakovv:setsecondjob')
+AddEventHandler('szymczakovv:setsecondjob', function(id, job, grade)
+	local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
+	if xPlayer.group == 'superadmin' then
+		SetJob(id, job, grade)
+	end
+end)
+
 RegisterServerEvent('szymczakovv:setSecondJob')
 AddEventHandler('szymczakovv:setSecondJob', function(job)
 	local _source = source
@@ -30,6 +39,19 @@ AddEventHandler('szymczakovv:setSecondJob', function(job)
 		UpdateJobsDB(xPlayer.getIdentifier(), value.first_job)
 	end
 end)
+
+SetJob = function(src, job, grade)
+    local xTarget = ESX.GetPlayerFromId(src)
+	UpdateJobsDB(xTarget.getIdentifier(), job, grade)
+	
+	for i=1, #JobList, 1 do
+		local job = JobList[i]
+		if ((tostring(job.license)) == tostring(xTarget.getIdentifier())) then 
+			job = job.secondjob
+			grade = job.secondjobgrade
+		end
+	end
+end
 
 UpdateJobsDB = function(license, val)
 	MySQL.Async.execute('UPDATE users SET secondjob = @secondjob WHERE identifier = @license',
