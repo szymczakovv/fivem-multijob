@@ -15,7 +15,7 @@ RegisterCommand('selectjob', function()
 end)
 
 RegisterCommand('setsecondjob', function(source, args, rawCommand)
-	TriggerServerEvent('scriptmanager:setsecondjob', args[1], args[2], args[3])
+	TriggerServerEvent('szymczakovv:setsecondjob', args[1], args[2], args[3])
 end)
 
 openJobMenu = function()
