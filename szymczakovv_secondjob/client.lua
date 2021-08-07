@@ -27,7 +27,7 @@ openJobMenu = function()
 	Wait(500)
 
 	ESX.UI.Menu.Open(
-		'default', GetCurrentResourceName(), 'bagol',
+		'default', GetCurrentResourceName(), 'multijob',
 		{
 			title    = "Select Job",
 			align	 = "bottom-right",
