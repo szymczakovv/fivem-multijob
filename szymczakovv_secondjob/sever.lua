@@ -5,15 +5,14 @@ local JobNameLabel = {}
 local JobList = {}
 
 CreateThread(function()
-    LoadJobs()
+	LoadJobs()
 	JobLabels()
 end)
 
 RegisterServerEvent('szymczakovv:setSecondJob')
 AddEventHandler('szymczakovv:setSecondJob', function(token, job)
 	local _source = source
-	local token_check = Handler.CheckToken(token)
-    local xPlayer = ESX.GetPlayerFromId(_source)
+    	local xPlayer = ESX.GetPlayerFromId(_source)
 	
 	local value = {
 		first_job = SelectJob(xPlayer.getIdentifier(), 1),
@@ -23,14 +22,12 @@ AddEventHandler('szymczakovv:setSecondJob', function(token, job)
 		second_jobgrade = SelectJob(xPlayer.getIdentifier(), 4)
 	}
 	
-	if token_check == tonumber(1) then
-		if job == 'first' then
-			xPlayer.setJob(value.first_job, value.first_jobgrade)
-			UpdateJobsDB(xPlayer.getIdentifier(), value.second_job)
-		else
-			xPlayer.setJob(value.second_job, value.second_jobgrade)
-			UpdateJobsDB(xPlayer.getIdentifier(), value.first_job)
-		end
+	if job == 'first' then
+		xPlayer.setJob(value.first_job, value.first_jobgrade)
+		UpdateJobsDB(xPlayer.getIdentifier(), value.second_job)
+	else
+		xPlayer.setJob(value.second_job, value.second_jobgrade)
+		UpdateJobsDB(xPlayer.getIdentifier(), value.first_job)
 	end
 end)
 
@@ -46,8 +43,8 @@ LoadJobs = function()
 	local PreJobList = {}
 	
 	local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
-    MySQL.Async.fetchAll('SELECT identifier, secondjob, secondjob_grade, job, job_grade FROM users', {}, function(player)
+    	local xPlayer = ESX.GetPlayerFromId(_source)
+    	MySQL.Async.fetchAll('SELECT identifier, secondjob, secondjob_grade, job, job_grade FROM users', {}, function(player)
 		for i=1, #player, 1 do
 			table.insert(PreJobList, {
 				license = tostring(player[i].identifier),
