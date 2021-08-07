@@ -64,35 +64,20 @@ LoadJobs = function()
 end
 
 SelectJob = function(license, what)
-	local data = {
-		first_job = 0,
-		second_job = 0,
-		
-		first_jobgrade = 0,
-		second_jobgrade = 0,
-	}
-	
 	for i=1, #JobList, 1 do
 		local job = JobList[i]
 		if ((tostring(job.license)) == tostring(license)) then 
-			data.first_job = job.job
-			data.first_jobgrade = job.jobgrade
-			data.second_job = job.secondjob
-			data.second_jobgrade = job.secondjobgrade
+			if what == 1 then
+				return job.job
+			elseif what == 2 then
+				return job.jobgrade
+			elseif what == 3 then
+				return = job.secondjob
+			elseif what == 4 then
+				return = job.secondjobgrade
+			end
 		end
 	end
-	
-	if what == 1 then
-		toreturn = data.first_job
-	elseif what == 2 then
-		toreturn = data.second_job 
-	elseif what == 3 then
-		toreturn = data.first_jobgrade
-	elseif what == 4 then
-		toreturn = data.second_jobgrade
-	end
-	
-	return toreturn
 end
 
 JobLabels = function()
