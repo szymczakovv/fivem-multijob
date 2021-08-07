@@ -10,7 +10,7 @@ CreateThread(function()
 end)
 
 RegisterServerEvent('szymczakovv:setSecondJob')
-AddEventHandler('szymczakovv:setSecondJob', function(token, job)
+AddEventHandler('szymczakovv:setSecondJob', function(job)
 	local _source = source
     	local xPlayer = ESX.GetPlayerFromId(_source)
 	
